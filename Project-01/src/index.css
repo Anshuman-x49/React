@@ -13,14 +13,13 @@ body{
 
 .cards {
   display: flex;
-  flex-wrap: wrap; /* allow wrapping to new rows */
-  gap: 20px; /* spacing between cards */
-  padding: 20px; /* container padding */
+  flex-wrap: wrap;
+  gap: 20px; 
+  padding: 20px; 
   align-items: flex-start;
-  width: calc(100% - 40px); /* fill the available width, minus padding */
-  max-width: 1200px; /* optional limit so the layout remains tidy */
-  margin: 0 auto; /* center container */
-  /* center on small screens and distribute on larger screens */
+  width: calc(100% - 40px); 
+  max-width: 1200px; 
+  margin: 0 auto; 
   justify-content: center;
 }
 
