@@ -13,17 +13,74 @@ body{
 
 .cards {
   display: flex;
-  flex-direction: row; /* align horizontally */
+  flex-wrap: wrap; /* allow wrapping to new rows */
   gap: 20px; /* spacing between cards */
   padding: 20px; /* container padding */
   align-items: flex-start;
-  /* if there are many cards, allow horizontal scrolling on smaller viewports */
-  overflow-x: auto;
+  width: calc(100% - 40px); /* fill the available width, minus padding */
+  max-width: 1200px; /* optional limit so the layout remains tidy */
+  margin: 0 auto; /* center container */
+  /* center on small screens and distribute on larger screens */
+  justify-content: center;
+}
+
+@media (min-width: 1000px) {
+  .cards {
+    justify-content: space-between;
+  }
+  .card {
+    /* let cards grow evenly to fill the row but keep a max width */
+    flex: 1 1 340px;
+    max-width: 420px;
+    height: 420px;
+  }
+  .center h4 {
+    font-size: 20px;
+  }
+  .center h2 {
+    font-size: 20px;
+  }
+  .bottom button {
+    padding: 8px 14px;
+    font-size: 15px;
+  }
+}
+
+/* narrower screens: allow horizontal scroll if needed */
+@media (max-width: 520px) {
+  .cards {
+    overflow-x: auto;
+    padding-left: 12px;
+  }
+  .card {
+    flex: 0 0 95%;
+    width: 95%;
+    margin: 12px 6px;
+    height: auto; /* allow card height to fit content on small screens */
+  }
+}
+
+/* Medium screens: two cards per row */
+@media (min-width: 600px) and (max-width: 999px) {
+  .card {
+    flex: 0 0 48%;
+    width: 48%;
+    margin: 12px 0;
+    height: 420px;
+  }
+}
+
+/* Slightly increase image size for larger cards */
+@media (min-width: 900px) {
+  .top img {
+    width: 56px;
+  }
 }
 
 .card {
-  width: 280px;
-  height: 350px;
+  flex: 0 0 340px; /* slightly bigger base width */
+  width: 340px;
+  height: 380px; /* a bit taller to better fit content */
   border: 1px solid #ccc;
   border-radius: 8px;
   /* stronger box shadow for better visibility */
@@ -31,7 +88,7 @@ body{
   background-color: #fff;
   overflow: hidden;
   padding: 20px;
-  margin: 30px 10px;
+  margin: 20px 0; /* vertical spacing handled here; horizontal spacing handled by gap on container */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -47,7 +104,7 @@ body{
   padding: 3px;
   width: 44px;
   aspect-ratio: 1;
-  border: #bababa 2px solid;
+  border: 2px solid #bababa;
   border-radius: 50%;
 }
 
@@ -85,6 +142,11 @@ body{
   font-weight: 600;
 }
 
+.center h2 {
+  font-size: 16px;
+  font-weight: 700;
+}
+
 .center h4 span {
   color: #bababa;
   font-size: 13px;
@@ -101,7 +163,7 @@ body{
 .tags span {
   padding: 3px 6px;
   text-align: center;
-  border: #bababa;
+  border: 1px solid #bababa;
   background-color: #bababa;
   border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -113,7 +175,7 @@ body{
 .bottom {
   display: flex;
   justify-content: space-between;
-  border-top: #bababa 1px solid;
+  border-top: 1px solid #bababa;
   margin: 10px 0;
   padding-top: 10px;
 }
