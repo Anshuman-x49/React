@@ -1,14 +1,12 @@
-import { Bookmark } from 'lucide-react'
+import React from 'react';
 
 const Card = (props) => {
-   
-
   return (
     <>
         <div className="card">
             <div className="top">
                 <img src={props.brandLogo} alt="Logo" />
-                <button>Save <Bookmark size={18} strokeWidth={1} /></button>
+                <button>Save</button>
             </div>
             <div className="center">
                 <h4>{props.companyName} <span>5 days ago</span></h4>
