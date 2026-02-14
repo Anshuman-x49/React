@@ -1,0 +1,41 @@
+:root {
+    /* colors */
+    --bg-primary-color: rgb(21, 20, 20);
+    --text-primary-color: rgb(245, 229, 229);
+
+    /* spacing */
+    --Space-s: .25rem;
+    --Space-m: .5rem;
+    --Space-l: 1rem;
+    --Space-xl: 2rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background-color: var(--bg-primary-color);
+    color: var(--text-primary-color);
+    padding: var(--Space-m);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}
