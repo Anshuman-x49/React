@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 const Form = ({ users, setUsers, setToggle, editId, setEditId }) => {
 
     const isEditing = editId !== null;
-    const currentUser = isEditing ? users.find((u) => u.id === editId) : null;
+    const currentUser = isEditing ? users.find((user) => user.id === editId) : null;
 
     let {
         register,
