@@ -1,5 +1,9 @@
 import { useForm } from "react-hook-form";
-const Form = ({ setUsers, setToggle }) => {
+const Form = ({ users, setUsers, setToggle, editId, setEditId }) => {
+
+    const isEditing = editId !== null;
+    const currentUser = isEditing ? users.find((u) => u.id === editId) : null;
+
     let {
         register,
         handleSubmit,
@@ -7,14 +11,20 @@ const Form = ({ setUsers, setToggle }) => {
         formState: { errors },
     } = useForm({
         mode: "onChange",
-        
+        values: currentUser || { name: "", email: "", mobile: "", image: "" }
     });
 
     console.log(errors)
 
     const formSubmit = (data) => {
         console.log(data);
-        setUsers((prev) => [...prev, { ...data, id: Date.now() }])
+        if (isEditing) {
+            setUsers((prev) => prev.map((user) => user.id === editId ? { ...user, ...data } : user))
+            setEditId(null);
+        }
+        else {
+            setUsers((prev) => [...prev, { ...data, id: Date.now() }])
+        }
         reset();
         setToggle((prev) => !prev)
     }
@@ -40,11 +50,11 @@ const Form = ({ setUsers, setToggle }) => {
                 {errors.name && <p className="text-red-700 text-xs">{errors.name.message}</p>}
                 <input
                     className="p-2 outline-none rounded border border-gray-200 focus:border-gray-700"
-                    {...register("email",{
-                        required:"Email is required",
-                        pattern:{
-                            value:"",
-                            message:"Invalid email"
+                    {...register("email", {
+                        required: "Email is required",
+                        pattern: {
+                            value: "",
+                            message: "Invalid email"
                         }
                     })}
                     type="email"
@@ -53,15 +63,15 @@ const Form = ({ setUsers, setToggle }) => {
                 {errors.email && <p className="text-red-700 text-xs">{errors.email.message}</p>}
                 <input
                     className="p-2 outline-none rounded border border-gray-200 focus:border-gray-700"
-                    {...register("mobile",{
-                        required:"Mobile number is required",
-                        minLength:{
-                            value:10,
-                            message:"Minimum 10 digits required"
+                    {...register("mobile", {
+                        required: "Mobile number is required",
+                        minLength: {
+                            value: 10,
+                            message: "Minimum 10 digits required"
                         },
-                        maxLength:{
-                            value:10,
-                            message:"Maximum 10 digits allowed"
+                        maxLength: {
+                            value: 10,
+                            message: "Maximum 10 digits allowed"
                         }
                     })}
                     type="tel"
@@ -70,8 +80,8 @@ const Form = ({ setUsers, setToggle }) => {
                 {errors.mobile && <p className="text-red-700 text-xs">{errors.mobile.message}</p>}
                 <input
                     className="p-2 outline-none rounded border border-gray-200 focus:border-gray-700"
-                    {...register("image",{
-                        required:"Image is required"
+                    {...register("image", {
+                        required: "Image is required"
                     })}
                     type="url"
                     placeholder="Image URL"
@@ -81,7 +91,7 @@ const Form = ({ setUsers, setToggle }) => {
                     className="bg-blue-700 hover:bg-blue-900 hover:scale-101 duration-170 transition-all px-6 py-2 rounded-lg font-medium cursor-pointer text-white uppercase"
                     type="submit"
                 >
-                    create user
+                    {isEditing ? "update user" : "create user"}
                 </button>
             </form>
         </div>

@@ -8,10 +8,17 @@ const App = () => {
 
   const [toggle, setToggle] = useState(false)
 
-  const[users,setUsers]=useState([])
+  const [users, setUsers] = useState([])
+
+  const [editId, setEditId] = useState(null)
 
   const deleteUser = (id) => {
     setUsers((prev) => prev.filter(user => user.id !== id))
+  }
+
+  const editUser = (id) => {
+    setEditId(id)
+    setToggle(prev => !prev)
   }
 
   return (
@@ -21,12 +28,12 @@ const App = () => {
         toggle ? (
           <div className="flex flex-wrap gap-3">
             {users.map((elem) => (
-              <Cards key={elem.id} users={elem} deleteUser={deleteUser}/>
+              <Cards key={elem.id} users={elem} deleteUser={deleteUser} editUser={editUser}/>
             ))}
           </div>
         ) : (
           <div>
-              <Form setUsers={setUsers} setToggle={setToggle}/>
+              <Form users={users} setUsers={setUsers} setToggle={setToggle} editId={editId} setEditId={setEditId}/>
           </div>
         )
       }
