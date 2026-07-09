@@ -11,7 +11,7 @@ const App = () => {
   const[users,setUsers]=useState([])
 
   const deleteUser = (id) => {
-    setUsers(users.filter(user => user.id !== id))
+    setUsers((prev) => prev.filter(user => user.id !== id))
   }
 
   return (
@@ -20,8 +20,8 @@ const App = () => {
       {
         toggle ? (
           <div className="flex flex-wrap gap-3">
-            {users.map((elem, index) => (
-              <Cards key={index} users={elem} deleteUser={deleteUser}/>
+            {users.map((elem) => (
+              <Cards key={elem.id} users={elem} deleteUser={deleteUser}/>
             ))}
           </div>
         ) : (

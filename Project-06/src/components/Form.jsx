@@ -14,7 +14,7 @@ const Form = ({ setUsers, setToggle }) => {
 
     const formSubmit = (data) => {
         console.log(data);
-        setUsers((prev) => [...prev, data])
+        setUsers((prev) => [...prev, { ...data, id: Date.now() }])
         reset();
         setToggle((prev) => !prev)
     }
