@@ -8,12 +8,16 @@ const App = () => {
 
   const [toggle, setToggle] = useState(false)
 
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState(() => {
+    return JSON.parse(localStorage.getItem("users")) || []
+  })
 
   const [editId, setEditId] = useState(null)
 
   const deleteUser = (id) => {
-    setUsers((prev) => prev.filter(user => user.id !== id))
+    const updatedUsers = users.filter(user => user.id !== id)
+    setUsers(updatedUsers)
+    localStorage.setItem("users", JSON.stringify(updatedUsers))
   }
 
   const editUser = (id) => {

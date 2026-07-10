@@ -18,15 +18,18 @@ const Form = ({ users, setUsers, setToggle, editId, setEditId }) => {
 
     const formSubmit = (data) => {
         console.log(data);
+        let updatedUsers;
         if (isEditing) {
-            setUsers((prev) => prev.map((user) => user.id === editId ? { ...user, ...data } : user))
+            updatedUsers = users.map((user) => user.id === editId ? { ...user, ...data } : user);
             setEditId(null);
         }
         else {
-            setUsers((prev) => [...prev, { ...data, id: Date.now() }])
+            updatedUsers = [...users, { ...data, id: Date.now() }];
         }
+        setUsers(updatedUsers);
+        localStorage.setItem("users", JSON.stringify(updatedUsers));
         reset();
-        setToggle((prev) => !prev)
+        setToggle((prev) => !prev);
     }
 
     return (
