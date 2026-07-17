@@ -32,7 +32,7 @@ const Navbar = () => {
                 >
                     Cart
                     {cartCount > 0 && (
-                        <span className="bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded-full min-w-[1.25rem] text-center shadow-md animate-pulse">
+                        <span className="bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded-full min-w-5 text-center shadow-md animate-pulse">
                             {cartCount}
                         </span>
                     )}
