@@ -8,8 +8,8 @@ const Navbar = () => {
 
     return (
         <div className='flex justify-between items-center p-6 bg-gray-800 shadow-md rounded-2xl text-white border border-gray-700/50'>
-            <h1 className='font-bold text-2xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300 cursor-pointer' onClick={() => setToggle(true)}>
-                QuickStore
+            <h1 className='font-bold text-2xl tracking-wider text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-indigo-300 cursor-pointer' onClick={() => setToggle(true)}>
+                MyStore
             </h1>
             <div className="flex gap-6 font-semibold text-base items-center">
                 <span 
