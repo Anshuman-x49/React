@@ -12,9 +12,9 @@ export const ProductProvider = ({ children }) => {
         try {
             const res = await api.get("/products")
             setProducts(res.data)
-            console.log(res.data)
+            console.log("product data -> ", res.data)
         } catch (error) {
-            console.error(error)
+            console.error("product data fetch error -> ", error)
         }
     }
 
