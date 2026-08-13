@@ -28,8 +28,7 @@ export const currentEmployee = createAsyncThunk(
     async (_, thunkApi) => {
         try {
             const res = await axiosInstance.get('/auth/me');
-            console.log("Current employee response:", res.data);
-            return res.data.data;
+            return res.data.user;
         } catch (error: unknown) {
             if (isAxiosError(error)) {
                 const errorMessage =
