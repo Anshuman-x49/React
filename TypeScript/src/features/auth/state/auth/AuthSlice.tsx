@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginEmployee } from "./AuthActions";
+import { loginEmployee, currentEmployee } from "./AuthActions";
 
 interface AuthState {
     employee: string | null;
@@ -40,6 +40,19 @@ const AuthSlice = createSlice({
                 state.error = null;
             })
             .addCase(loginEmployee.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload as string;
+            })
+            .addCase(currentEmployee.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(currentEmployee.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.employee = action.payload;
+                state.error = null;
+            })
+            .addCase(currentEmployee.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload as string;
             });

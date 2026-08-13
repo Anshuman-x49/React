@@ -8,8 +8,7 @@ export const loginEmployee = createAsyncThunk(
     async (credentials: LoginFormInputs, thunkApi) => {
         try {
             const res = await axiosInstance.post('/auth/login', credentials);
-            console.log("Login response:", res.data);
-            return res.data;
+            return res.data.data;
         } catch (error: unknown) {
             if (isAxiosError(error)) {
                 const errorMessage =
@@ -23,3 +22,24 @@ export const loginEmployee = createAsyncThunk(
         }
     }
 );
+
+export const currentEmployee = createAsyncThunk(
+    "auth/me",
+    async (_, thunkApi) => {
+        try {
+            const res = await axiosInstance.get('/auth/me');
+            console.log("Current employee response:", res.data);
+            return res.data.data;
+        } catch (error: unknown) {
+            if (isAxiosError(error)) {
+                const errorMessage =
+                    error.response?.data?.message ||
+                    (typeof error.response?.data === 'string' ? error.response.data : null) ||
+                    error.message ||
+                    "Login failed";
+                return thunkApi.rejectWithValue(errorMessage);
+            }
+            return thunkApi.rejectWithValue("An unexpected error occurred");
+        }
+    }
+)
