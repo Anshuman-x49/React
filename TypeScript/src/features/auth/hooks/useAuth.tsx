@@ -1,8 +1,9 @@
 import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "../../../app/store/store";
+import type { AppDispatch, RootState } from "../../../app/store/store";
 import { addEmployee, removeEmployee } from "../state/auth/AuthSlice";
+import { loginEmployee } from "../state/auth/AuthActions";
 
 export type LoginFormInputs = {
     email: string;
@@ -18,7 +19,7 @@ export type RegisterFormInputs = {
 };
 
 export const useLoginForm = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const {
         register,
         handleSubmit,
@@ -33,8 +34,7 @@ export const useLoginForm = () => {
     });
 
     const onSubmit = (data: LoginFormInputs) => {
-        console.log("Login Data:", data);
-        dispatch(addEmployee({ email: data.email }));
+        dispatch(loginEmployee(data));
     };
 
     return {
@@ -47,7 +47,7 @@ export const useLoginForm = () => {
 };
 
 export const useRegisterForm = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const {
         register,
         handleSubmit,
@@ -102,7 +102,7 @@ export const useRegisterForm = () => {
 };
 
 const useAuth = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const authState = useSelector((state: RootState) => state.auth);
     const loginForm = useLoginForm();
     const registerForm = useRegisterForm();
