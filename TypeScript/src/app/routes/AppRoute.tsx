@@ -8,8 +8,11 @@ import { currentEmployee } from "../../features/auth/state/auth/AuthActions"
 import type { AppDispatch } from "../store/store"
 import PublicRoutes from "./protectedRoutes/PublicRoutes"
 import ProtectedRoutes from "./protectedRoutes/ProtectedRoutes"
-import Home from "../../features/dashboard/ui/pages/Home"
 import Dashboardlayout from "../layouts/Dashboardlayout"
+import { commonRoutes } from "./commonRoutes"
+import RoleBaseRoutes from "./protectedRoutes/RoleBaseRoutes"
+import { adminRoutes } from "./separateRoutes/adminRoutes"
+import { employeeRoutes } from "./separateRoutes/employeeRoutes"
 
 
 const router = createBrowserRouter([
@@ -34,16 +37,21 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path: "/",
+        path: "/home",
         element: <ProtectedRoutes />,
         children: [
             {
                 path: "",
                 element: <Dashboardlayout />,
                 children: [
+                    ...commonRoutes,
                     {
-                        path: "",
-                        element: <Home />
+                        element: <RoleBaseRoutes role={"admin"} />,
+                        children: adminRoutes
+                    },
+                    {
+                        element: <RoleBaseRoutes role={"employee"} />,
+                        children: employeeRoutes
                     }
                 ]
             },

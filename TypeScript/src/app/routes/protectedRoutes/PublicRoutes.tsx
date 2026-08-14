@@ -13,7 +13,7 @@ const PublicRoutes = () => {
 
     // If employee is logged in, redirect to home
     if (employee) {
-        return <Navigate to="/" replace />;
+        return <Navigate to="/home" replace />;
     }
 
     // If not logged in, render children (the public routes)

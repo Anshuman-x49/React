@@ -1,8 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { loginEmployee, currentEmployee } from "./AuthActions";
 
+export interface Employee {
+    _id: string;
+    name: string;
+    email: string;
+    role: string;
+    [key: string]: unknown; // allow any extra fields from the API
+}
+
 interface AuthState {
-    employee: string | null;
+    employee: Employee | null;
     isLoading: boolean;
     error: string | null;
 }
