@@ -17,10 +17,10 @@ const Register = () => {
     } = useRegisterForm();
 
     return (
-        <div className="h-screen overflow-hidden bg-[#141218] font-['Inter'] text-[#e6e0e9]">
+        <div className="h-screen overflow-hidden bg-(--background) font-['Inter'] text-(--text)">
             {/* Header */}
             <header className="fixed left-0 top-0 z-50 flex w-full items-center justify-between px-6 py-4">
-                <div className="text-xl font-bold tracking-tight">
+                <div className="text-xl font-bold tracking-tight text-(--primary)">
                     Team Sync
                 </div>
             </header>
@@ -28,7 +28,7 @@ const Register = () => {
             {/* Main */}
             <main className="flex h-screen w-full overflow-hidden">
                 {/* Left Side */}
-                <section className="relative hidden h-full w-[40%] flex-col justify-end overflow-hidden border-r border-[#494551]/20 bg-linear-to-br from-[#0f172a] to-[#1e1b4b] p-10 md:flex lg:p-12">
+                <section className="relative hidden h-full w-[40%] flex-col justify-end overflow-hidden border-r border-(--border) bg-linear-to-br from-(--surface-low) to-(--surface-high) p-10 md:flex lg:p-12">
                     {/* Background image */}
                     <div className="absolute inset-0">
                         <img
@@ -37,13 +37,13 @@ const Register = () => {
                             className="h-full w-full object-cover opacity-40 mix-blend-luminosity"
                         />
 
-                        <div className="absolute inset-0 bg-linear-to-t from-[#141218] via-transparent to-transparent" />
+                        <div className="absolute inset-0 bg-linear-to-t from-(--background) via-transparent to-transparent" />
                     </div>
 
                     {/* Left Content */}
                     <div className="relative z-10 space-y-3">
-                        <div className="flex items-center gap-2 text-[#cfbcff]">
-                            <FontAwesomeIcon icon={faWandMagicSparkles} className="text-sm text-[#cfbcff]" />
+                        <div className="flex items-center gap-2 text-(--primary)">
+                            <FontAwesomeIcon icon={faWandMagicSparkles} className="text-sm text-(--primary)" />
 
                             <span className="text-[11px] font-semibold uppercase tracking-[0.2em]">
                                 Next-Gen Intelligence
@@ -54,7 +54,7 @@ const Register = () => {
                             Accelerate your team's intelligence.
                         </h1>
 
-                        <p className="max-w-sm text-sm leading-5 text-[#cbc4d2]">
+                        <p className="max-w-sm text-sm leading-5 text-(--text-muted)">
                             Connect your enterprise data to our specialized AI models and
                             unlock unparalleled strategic insights in seconds.
                         </p>
@@ -63,14 +63,14 @@ const Register = () => {
                         <div className="flex gap-8 pt-4 opacity-60">
                             <div className="flex flex-col">
                                 <span className="text-lg font-bold">99.9%</span>
-                                <span className="text-xs text-[#cbc4d2]">
+                                <span className="text-xs text-(--text-muted)">
                                     Uptime SLA
                                 </span>
                             </div>
 
                             <div className="flex flex-col">
                                 <span className="text-lg font-bold">ISO</span>
-                                <span className="text-xs text-[#cbc4d2]">
+                                <span className="text-xs text-(--text-muted)">
                                     27001 Certified
                                 </span>
                             </div>
@@ -79,7 +79,7 @@ const Register = () => {
                 </section>
 
                 {/* Right Side */}
-                <section className="flex h-full w-full items-center justify-center bg-[#141218] px-6 py-8 md:w-[60%] md:px-12 lg:px-16 overflow-y-auto md:overflow-hidden">
+                <section className="flex h-full w-full items-center justify-center bg-(--background) px-6 py-8 md:w-[60%] md:px-12 lg:px-16 overflow-y-auto md:overflow-hidden">
                     <div className="w-full max-w-110">
                         {/* Heading */}
                         <div className="mb-5 space-y-1">
@@ -87,7 +87,7 @@ const Register = () => {
                                 Create your account
                             </h2>
 
-                            <p className="text-xs text-[#cbc4d2]">
+                            <p className="text-xs text-(--text-muted)">
                                 Experience the future of collaborative data intelligence.
                             </p>
                         </div>
@@ -101,13 +101,13 @@ const Register = () => {
                             <div>
                                 <label
                                     htmlFor="name"
-                                    className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-[#cbc4d2]"
+                                    className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-(--text-muted)"
                                 >
                                     Full Name
                                 </label>
 
                                 <div className="relative">
-                                    <FontAwesomeIcon icon={faUser} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs text-[#948e9c]" />
+                                    <FontAwesomeIcon icon={faUser} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs text-(--text-muted)" />
 
                                     <input
                                         id="name"
@@ -120,15 +120,15 @@ const Register = () => {
                                                 message: "Name must contain at least 2 characters",
                                             },
                                         })}
-                                        className={`w-full rounded-lg border bg-[#1d1b20] py-2.5 pl-10 pr-4 text-sm text-[#e6e0e9] outline-none transition placeholder:text-[#948e9c] focus:border-transparent focus:ring-2 focus:ring-[#cfbcff] ${errors.name
-                                            ? "border-red-400"
-                                            : "border-[#494551]"
+                                        className={`w-full rounded-lg border bg-(--surface-low) py-2.5 pl-10 pr-4 text-sm text-(--text) outline-none transition placeholder:text-(--text-muted) focus:border-transparent focus:ring-2 focus:ring-(--primary) ${errors.name
+                                            ? "border-(--error)"
+                                            : "border-(--border)"
                                             }`}
                                     />
                                 </div>
 
                                 {errors.name && (
-                                    <p className="mt-1 text-xs text-[#ffb4ab]">
+                                    <p className="mt-1 text-xs text-(--error)">
                                         {errors.name.message}
                                     </p>
                                 )}
@@ -138,13 +138,13 @@ const Register = () => {
                             <div>
                                 <label
                                     htmlFor="email"
-                                    className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-[#cbc4d2]"
+                                    className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-(--text-muted)"
                                 >
                                     Email Address
                                 </label>
 
                                 <div className="relative">
-                                    <FontAwesomeIcon icon={faEnvelope} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs text-[#948e9c]" />
+                                    <FontAwesomeIcon icon={faEnvelope} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs text-(--text-muted)" />
 
                                     <input
                                         id="email"
@@ -157,15 +157,15 @@ const Register = () => {
                                                 message: "Enter a valid email address",
                                             },
                                         })}
-                                        className={`w-full rounded-lg border bg-[#1d1b20] py-2.5 pl-10 pr-4 text-sm text-[#e6e0e9] outline-none transition placeholder:text-[#948e9c] focus:border-transparent focus:ring-2 focus:ring-[#cfbcff] ${errors.email
-                                            ? "border-red-400"
-                                            : "border-[#494551]"
+                                        className={`w-full rounded-lg border bg-(--surface-low) py-2.5 pl-10 pr-4 text-sm text-(--text) outline-none transition placeholder:text-(--text-muted) focus:border-transparent focus:ring-2 focus:ring-(--primary) ${errors.email
+                                            ? "border-(--error)"
+                                            : "border-(--border)"
                                             }`}
                                     />
                                 </div>
 
                                 {errors.email && (
-                                    <p className="mt-1 text-xs text-[#ffb4ab]">
+                                    <p className="mt-1 text-xs text-(--error)">
                                         {errors.email.message}
                                     </p>
                                 )}
@@ -175,13 +175,13 @@ const Register = () => {
                             <div>
                                 <label
                                     htmlFor="password"
-                                    className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-[#cbc4d2]"
+                                    className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-(--text-muted)"
                                 >
                                     Password
                                 </label>
 
                                 <div className="relative">
-                                    <FontAwesomeIcon icon={faLock} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs text-[#948e9c]" />
+                                    <FontAwesomeIcon icon={faLock} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs text-(--text-muted)" />
 
                                     <input
                                         id="password"
@@ -194,15 +194,15 @@ const Register = () => {
                                                 message: "Password must be at least 8 characters",
                                             },
                                         })}
-                                        className={`w-full rounded-lg border bg-[#1d1b20] py-2.5 pl-10 pr-4 text-sm text-[#e6e0e9] outline-none transition placeholder:text-[#948e9c] focus:border-transparent focus:ring-2 focus:ring-[#cfbcff] ${errors.password
-                                            ? "border-red-400"
-                                            : "border-[#494551]"
+                                        className={`w-full rounded-lg border bg-(--surface-low) py-2.5 pl-10 pr-4 text-sm text-(--text) outline-none transition placeholder:text-(--text-muted) focus:border-transparent focus:ring-2 focus:ring-(--primary) ${errors.password
+                                            ? "border-(--error)"
+                                            : "border-(--border)"
                                             }`}
                                     />
                                 </div>
 
                                 {errors.password && (
-                                    <p className="mt-1 text-xs text-[#ffb4ab]">
+                                    <p className="mt-1 text-xs text-(--error)">
                                         {errors.password.message}
                                     </p>
                                 )}
@@ -214,14 +214,14 @@ const Register = () => {
                                             <div
                                                 key={item}
                                                 className={`h-1 flex-1 rounded-full ${item <= passwordStrength
-                                                    ? "bg-[#cfbcff]"
-                                                    : "bg-[#494551]/40"
+                                                    ? "bg-(--primary)"
+                                                    : "bg-(--border)/40"
                                                     }`}
                                             />
                                         ))}
                                     </div>
 
-                                    <span className="text-[11px] text-[#cfbcff]">
+                                    <span className="text-[11px] text-(--primary)">
                                         {getStrengthText()}
                                     </span>
                                 </div>
@@ -235,24 +235,24 @@ const Register = () => {
                                     {...register("terms", {
                                         required: "You must accept the terms",
                                     })}
-                                    className="mt-0.5 h-4 w-4 rounded border-[#494551] bg-[#1d1b20] text-[#cfbcff] focus:ring-[#cfbcff]"
+                                    className="mt-0.5 h-4 w-4 rounded border-(--border) bg-(--surface-low) text-(--primary) focus:ring-(--primary)"
                                 />
 
                                 <label
                                     htmlFor="terms"
-                                    className="text-xs leading-relaxed text-[#cbc4d2]"
+                                    className="text-xs leading-relaxed text-(--text-muted)"
                                 >
                                     I agree to the{" "}
                                     <a
                                         href="#"
-                                        className="text-[#cfbcff] hover:underline"
+                                        className="text-(--primary) hover:underline"
                                     >
                                         Terms of Service
                                     </a>{" "}
                                     and{" "}
                                     <a
                                         href="#"
-                                        className="text-[#cfbcff] hover:underline"
+                                        className="text-(--primary) hover:underline"
                                     >
                                         Privacy Policy
                                     </a>
@@ -261,7 +261,7 @@ const Register = () => {
                             </div>
 
                             {errors.terms && (
-                                <p className="-mt-2 text-xs text-[#ffb4ab]">
+                                <p className="-mt-2 text-xs text-(--error)">
                                     {errors.terms.message}
                                 </p>
                             )}
@@ -272,13 +272,13 @@ const Register = () => {
 
                         {/* Divider */}
                         <div className="flex items-center gap-4 py-3">
-                            <div className="h-px flex-1 bg-[#494551]/30" />
+                            <div className="h-px flex-1 bg-(--border)/30" />
 
-                            <span className="text-[11px] font-semibold uppercase tracking-wider text-[#948e9c]">
+                            <span className="text-[11px] font-semibold uppercase tracking-wider text-(--text-muted)">
                                 Or continue with
                             </span>
 
-                            <div className="h-px flex-1 bg-[#494551]/30" />
+                            <div className="h-px flex-1 bg-(--border)/30" />
                         </div>
 
                         {/* SSO */}
@@ -289,11 +289,11 @@ const Register = () => {
 
                         {/* Login */}
                         <div className="pt-4 text-center">
-                            <p className="text-sm text-[#cbc4d2]">
+                            <p className="text-sm text-(--text-muted)">
                                 Already have an account?{" "}
                                 <Link
                                     to="/auth/login"
-                                    className="ml-1 font-bold text-[#cfbcff] hover:underline"
+                                    className="ml-1 font-bold text-(--primary) hover:underline"
                                 >
                                     Log In
                                 </Link>

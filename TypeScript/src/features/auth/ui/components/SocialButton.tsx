@@ -20,13 +20,13 @@ const SocialButton = ({
         <button
             type={type}
             onClick={onClick}
-            className={`group flex items-center justify-center gap-2 rounded-lg border border-[#494551]/50 bg-[#2b292f] px-4 py-3 text-sm transition-colors hover:bg-[#3b383e] ${className}`}
+            className={`group flex items-center justify-center gap-2 rounded-lg border border-(--border) bg-(--surface-high) px-4 py-3 text-sm transition-colors hover:bg-(--surface) ${className}`}
         >
             <FontAwesomeIcon
                 icon={icon}
-                className="text-sm text-[#cbc4d2] group-hover:text-white transition-colors"
+                className="text-sm text-(--text-muted) group-hover:text-(--text) transition-colors"
             />
-            <span className="text-[11px] font-semibold tracking-wider uppercase text-[#e6e0e9]">
+            <span className="text-[11px] font-semibold tracking-wider uppercase text-(--text)">
                 {label}
             </span>
         </button>

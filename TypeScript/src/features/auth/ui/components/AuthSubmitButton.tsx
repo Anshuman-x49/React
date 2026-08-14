@@ -21,7 +21,7 @@ const AuthSubmitButton = ({
             type="submit"
             disabled={disabled}
             onClick={onClick}
-            className={`flex w-full items-center justify-center gap-2 rounded-lg bg-[#6750a4] py-3.5 text-sm font-semibold text-[#e0d2ff] shadow-lg transition-all duration-300 hover:bg-[#cfbcff] hover:text-[#381e72] hover:shadow-[#cfbcff]/20 active:scale-[0.98] disabled:opacity-50 ${className}`}
+            className={`flex w-full items-center justify-center gap-2 rounded-lg bg-(--primary) py-3.5 text-sm font-semibold text-(--on-primary) shadow-lg transition-all duration-300 hover:opacity-90 active:scale-[0.98] disabled:opacity-50 ${className}`}
         >
             <span>{label}</span>
             {icon && <FontAwesomeIcon icon={icon} className="text-sm" />}
