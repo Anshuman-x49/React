@@ -1,11 +1,11 @@
 import Chat from "../../features/chats/ui/pages/Chat";
-import Home from "../../features/dashboard/ui/pages/Home";
 import Settings from "../../features/settings/ui/pages/Settings";
+import Dashboard from "../../features/dashboard/ui/pages/Dashboard";
 
 export const commonRoutes = [
     {
         path: "",
-        element: <Home/>
+        element: <Dashboard/>
     },
     {
         path: "chat",
