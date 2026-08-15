@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router"
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router"
 import AuthLayout from "../layouts/AuthLayout"
 import Login from "../../features/auth/ui/pages/Login"
 import Register from "../../features/auth/ui/pages/Register"
@@ -16,6 +16,10 @@ import { employeeRoutes } from "./separateRoutes/employeeRoutes"
 
 
 const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <Navigate to="/home" replace />
+    },
     {
         path: '/auth',
         element: <PublicRoutes />,
