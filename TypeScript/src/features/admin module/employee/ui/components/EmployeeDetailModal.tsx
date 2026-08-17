@@ -6,8 +6,6 @@ import {
     faCheck,
     faCalendarDays,
     faClock,
-    faCodeBranch,
-    faKey,
     faIdCard,
     faPenToSquare,
     faTrashCan,
@@ -175,28 +173,6 @@ const EmployeeDetailModal = ({
                                     <div className="font-medium text-(--text)">{formatDate(employee.updatedAt)}</div>
                                     <div className="text-[11px] font-mono text-(--text-muted)">{employee.updatedAt}</div>
                                 </div>
-                            </div>
-
-                            {/* Refresh Token */}
-                            <div className="flex items-center justify-between p-3.5">
-                                <span className="text-xs text-(--text-muted) font-medium flex items-center gap-1.5">
-                                    <FontAwesomeIcon icon={faKey} className="h-3.5 w-3.5 text-(--text-muted)" />
-                                    Refresh Token (refreshToken)
-                                </span>
-                                <span className="font-mono text-xs text-(--text-muted) bg-(--surface-high) px-2.5 py-1 rounded-md">
-                                    {employee.refreshToken ? `"${employee.refreshToken.slice(0, 16)}..."` : '"" (empty string)'}
-                                </span>
-                            </div>
-
-                            {/* Schema Version */}
-                            <div className="flex items-center justify-between p-3.5">
-                                <span className="text-xs text-(--text-muted) font-medium flex items-center gap-1.5">
-                                    <FontAwesomeIcon icon={faCodeBranch} className="h-3.5 w-3.5 text-(--text-muted)" />
-                                    Document Version (__v)
-                                </span>
-                                <span className="font-mono text-xs font-semibold bg-(--primary)/15 text-(--primary) px-2.5 py-0.5 rounded-full border border-(--primary)/20">
-                                    {employee.__v ?? 0}
-                                </span>
                             </div>
                         </div>
                     </div>

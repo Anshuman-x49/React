@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faUserPlus, faPenToSquare, faCheck } from "@fortawesome/free-solid-svg-icons";
 import type { Employee, EmployeeFormData } from "../../hooks/useEmployee";
@@ -20,18 +21,25 @@ const EmployeeFormModal = ({
 }: EmployeeFormModalProps) => {
     const isEdit = Boolean(employee);
 
-    const [formData, setFormData] = useState<EmployeeFormData>({
-        name: "",
-        email: "",
-        department: "developer",
-        role: "employee",
-        status: "active",
-        avatar: "",
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm<EmployeeFormData>({
+        defaultValues: {
+            name: "",
+            email: "",
+            department: "developer",
+            role: "employee",
+            status: "active",
+            avatar: "",
+        },
     });
 
     useEffect(() => {
         if (employee) {
-            setFormData({
+            reset({
                 name: employee.name || "",
                 email: employee.email || "",
                 department: employee.department || "developer",
@@ -40,7 +48,7 @@ const EmployeeFormModal = ({
                 avatar: employee.avatar || "",
             });
         } else {
-            setFormData({
+            reset({
                 name: "",
                 email: "",
                 department: "developer",
@@ -49,14 +57,13 @@ const EmployeeFormModal = ({
                 avatar: "",
             });
         }
-    }, [employee, isOpen]);
+    }, [employee, isOpen, reset]);
 
     if (!isOpen) return null;
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+    const onFormSubmit = async (data: EmployeeFormData) => {
         try {
-            await onSubmit(formData);
+            await onSubmit(data);
             onClose();
         } catch (error) {
             console.error("Failed to save employee:", error);
@@ -95,7 +102,7 @@ const EmployeeFormModal = ({
                 </div>
 
                 {/* Form Body */}
-                <form onSubmit={handleSubmit} className="p-6 space-y-4">
+                <form onSubmit={handleSubmit(onFormSubmit)} className="p-6 space-y-4">
                     {/* Name */}
                     <div>
                         <label className="block text-xs font-semibold uppercase tracking-wider text-(--text-muted) mb-1.5">
@@ -103,12 +110,18 @@ const EmployeeFormModal = ({
                         </label>
                         <input
                             type="text"
-                            required
-                            value={formData.name}
-                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                            {...register("name", {
+                                required: "Full Name is required",
+                                minLength: { value: 2, message: "Name must be at least 2 characters" },
+                            })}
                             placeholder="e.g. Netra Rajbanshi"
-                            className="w-full rounded-xl border border-(--border) bg-(--surface-low) px-3.5 py-2.5 text-sm text-(--text) placeholder:text-(--text-muted) outline-none transition-all focus:border-(--primary) focus:bg-(--surface-high)"
+                            className={`w-full rounded-xl border px-3.5 py-2.5 text-sm text-(--text) placeholder:text-(--text-muted) outline-none transition-all focus:bg-(--surface-high) ${
+                                errors.name ? "border-rose-500 focus:border-rose-500" : "border-(--border) focus:border-(--primary) bg-(--surface-low)"
+                            }`}
                         />
+                        {errors.name && (
+                            <p className="mt-1 text-xs text-rose-400 font-medium">{errors.name.message}</p>
+                        )}
                     </div>
 
                     {/* Email */}
@@ -118,12 +131,21 @@ const EmployeeFormModal = ({
                         </label>
                         <input
                             type="email"
-                            required
-                            value={formData.email}
-                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                            {...register("email", {
+                                required: "Email Address is required",
+                                pattern: {
+                                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                    message: "Please enter a valid email address",
+                                },
+                            })}
                             placeholder="e.g. netra@gmail.com"
-                            className="w-full rounded-xl border border-(--border) bg-(--surface-low) px-3.5 py-2.5 text-sm text-(--text) placeholder:text-(--text-muted) outline-none transition-all focus:border-(--primary) focus:bg-(--surface-high)"
+                            className={`w-full rounded-xl border px-3.5 py-2.5 text-sm text-(--text) placeholder:text-(--text-muted) outline-none transition-all focus:bg-(--surface-high) ${
+                                errors.email ? "border-rose-500 focus:border-rose-500" : "border-(--border) focus:border-(--primary) bg-(--surface-low)"
+                            }`}
                         />
+                        {errors.email && (
+                            <p className="mt-1 text-xs text-rose-400 font-medium">{errors.email.message}</p>
+                        )}
                     </div>
 
                     {/* Grid of Department & Role */}
@@ -134,8 +156,7 @@ const EmployeeFormModal = ({
                                 Department
                             </label>
                             <select
-                                value={formData.department}
-                                onChange={(e) => setFormData({ ...formData, department: e.target.value })}
+                                {...register("department")}
                                 className="w-full rounded-xl border border-(--border) bg-(--surface-low) px-3.5 py-2.5 text-sm text-(--text) outline-none transition-all focus:border-(--primary) cursor-pointer capitalize"
                             >
                                 <option value="developer">Developer</option>
@@ -153,8 +174,7 @@ const EmployeeFormModal = ({
                                 Role
                             </label>
                             <select
-                                value={formData.role}
-                                onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+                                {...register("role")}
                                 className="w-full rounded-xl border border-(--border) bg-(--surface-low) px-3.5 py-2.5 text-sm text-(--text) outline-none transition-all focus:border-(--primary) cursor-pointer capitalize"
                             >
                                 <option value="employee">Employee</option>
@@ -172,8 +192,7 @@ const EmployeeFormModal = ({
                                 Status
                             </label>
                             <select
-                                value={formData.status}
-                                onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+                                {...register("status")}
                                 className="w-full rounded-xl border border-(--border) bg-(--surface-low) px-3.5 py-2.5 text-sm text-(--text) outline-none transition-all focus:border-(--primary) cursor-pointer"
                             >
                                 <option value="active">Active</option>
@@ -189,11 +208,20 @@ const EmployeeFormModal = ({
                             </label>
                             <input
                                 type="url"
-                                value={formData.avatar}
-                                onChange={(e) => setFormData({ ...formData, avatar: e.target.value })}
+                                {...register("avatar", {
+                                    pattern: {
+                                        value: /^https?:\/\/.+/i,
+                                        message: "Must be a valid URL starting with http:// or https://",
+                                    },
+                                })}
                                 placeholder="https://..."
-                                className="w-full rounded-xl border border-(--border) bg-(--surface-low) px-3.5 py-2.5 text-sm text-(--text) placeholder:text-(--text-muted) outline-none transition-all focus:border-(--primary) focus:bg-(--surface-high)"
+                                className={`w-full rounded-xl border px-3.5 py-2.5 text-sm text-(--text) placeholder:text-(--text-muted) outline-none transition-all focus:bg-(--surface-high) ${
+                                    errors.avatar ? "border-rose-500 focus:border-rose-500" : "border-(--border) focus:border-(--primary) bg-(--surface-low)"
+                                }`}
                             />
+                            {errors.avatar && (
+                                <p className="mt-1 text-xs text-rose-400 font-medium">{errors.avatar.message}</p>
+                            )}
                         </div>
                     </div>
 

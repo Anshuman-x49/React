@@ -8,7 +8,8 @@ import {
     faUserPlus,
     faRotate,
 } from "@fortawesome/free-solid-svg-icons";
-import type { EmployeeFilters, ViewMode } from "../../types/employee.types";
+import type { EmployeeFilters, ViewMode } from "../../hooks/useEmployee";
+
 
 
 interface EmployeeHeaderProps {
