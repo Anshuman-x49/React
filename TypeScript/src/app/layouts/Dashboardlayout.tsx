@@ -18,11 +18,13 @@ const Dashboardlayout = () => {
     }, [mode])
 
     return (
-        <div className={`${mode} min-h-screen bg-(--background) text-(--text) grid grid-cols-[auto_1fr]`}>
+        <div className={`${mode} h-screen w-screen overflow-hidden bg-(--background) text-(--text) flex`}>
+            {/* Fixed Left Aside Sidebar */}
             <AsideBar />
-            <div className="flex flex-col flex-1 min-w-0 bg-(--background)">
+            
+            <div className="flex flex-col flex-1 min-w-0 h-screen overflow-hidden bg-(--background)">
                 <Navbar />
-                <main className="flex-1 p-6">
+                <main className="flex-1 p-6 overflow-y-auto scrollbar-none">
                     <Outlet />
                 </main>
             </div>
